@@ -10,7 +10,7 @@ class NewPost extends React.Component {
       [event.target.id]: event.target.value
     })
     if(event.target.value === "") {
-      event.target.nextSibling.style.display = 'flex'
+      event.target.nextSibling.style.display = 'block'
     } else {
       event.target.nextSibling.style.display = 'none'
     }
@@ -22,20 +22,20 @@ class NewPost extends React.Component {
     let hasName = (document.querySelector('#newPostForm').querySelector('#name').value !== "")
     let hasTitle = (document.querySelector('#newPostForm').querySelector('#title').value !== "")
     if(hasName && hasTitle) {
-      document.querySelector('#submitNew').style.display = 'flex'
+      document.querySelector('#submitNew').style.display = 'block'
     } else {
       document.querySelector('#submitNew').style.display = 'none'
     }
   }
   flipFlop = () => {
     if(this.state.showDiv === 1) {
-      document.querySelector('#newPostForm').style.display = "flex"
+      document.querySelector('#newPostForm').style.display = "block"
       document.querySelector('#postFeed').style.display = "none"
       this.setState({
         showDiv: 0
       })
     } else {
-      document.querySelector('#postFeed').style.display = "flex"
+      document.querySelector('#postFeed').style.display = "block"
       document.querySelector('#newPostForm').style.display = "none"
       this.setState({
         showDiv: 1
@@ -88,7 +88,7 @@ class App extends React.Component {
         posts: response.data
       })
       document.querySelector('#newPostForm').style.display = 'none'
-      document.querySelector('#postFeed').style.display = 'flex'
+      document.querySelector('#postFeed').style.display = 'block'
     })
   }
   render = () => {
@@ -96,7 +96,13 @@ class App extends React.Component {
       <div>
         <NewPost createPost={this.createPost} flipFlop={this.flipFlop}></NewPost>
         <div id="postFeed" style={{display: "flex"}}>
-          <h2>Posts will go here</h2>
+          <ul>
+            {this.state.posts.map(post => {
+              <li className='singlePost'>
+                <h3>{post.title}</h3>
+              </li>
+            })}
+          </ul>
         </div>
       </div>
     )
