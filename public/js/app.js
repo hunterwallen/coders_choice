@@ -5,6 +5,6 @@ class NewEntry extends React.Component {
     body: ''
   }
   render = () => {
-    <h1>App.js is linked</js>
+    return <h1>App.js is linked</js>
   }
 }
