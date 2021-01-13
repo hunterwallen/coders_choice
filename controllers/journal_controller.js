@@ -9,7 +9,7 @@ narativ.get('/', (req, res) => {
     })
 })
 // edit route
-narativ.put('/', (req, res ) => {
+narativ.put('/:id', (req, res ) => {
     Narativ.findByIdAndUpdate(
         req.params.id,
         req.body,
