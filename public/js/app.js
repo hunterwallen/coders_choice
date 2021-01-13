@@ -1,8 +1,30 @@
 class NewPost extends React.Component {
   state= {
     name: '',
-    date: '',
+    title: '',
     body: ''
+  }
+  changeState = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+    if(event.target.value === "") {
+      event.target.nextSibling.style.display = 'flex'
+    } else {
+      event.target.nextSibling.style.display = 'none'
+    }
+    if(event.target.id === "name" || event.target.id === "title") {
+      this.checkRequired()
+    }
+  }
+  checkRequired = () => {
+    let hasName = (document.querySelector('#newPostForm').querySelector('#name').value !== "")
+    let hasTitle = (document.querySelector('#newPostForm').querySelector('#title').value !== "")
+    if(hasName && hasTitle) {
+      document.querySelector('#submitNew').style.display = 'flex'
+    } else {
+      document.querySelector('#submitNew').style.display = 'none'
+    }
   }
   createPost = () => {
 
@@ -11,14 +33,16 @@ class NewPost extends React.Component {
     return (
       <div className='newPostDiv'>
         <h3>Create New NARATiV</h3>
-        <form onSubmit={this.createPost}>
-          <label for='name'>Name</label>
-          <input type='text' id='name'/>
-          <label for='title'>Title</label>
-          <input type='text' id='title'/>
-          <label for='body'>Body</label>
-          <textarea id='body'></textarea>
-          <input type='submit'/>
+        <form id='newPostForm' onSubmit={this.createPost}>
+          <label htmlFor='name'>Name</label>
+          <input type='text' id='name' onChange={this.changeState}/>
+          <h6>This field is required</h6>
+          <label htmlFor='title'>Title</label>
+          <input type='text' id='title' onChange={this.changeState}/>
+          <h6>This field is required</h6>
+          <label htmlFor='body'>Body</label>
+          <textarea id='body' onChange={this.changeState}></textarea>
+          <input type='submit' id='submitNew' style={{display: 'none'}}/>
         </form>
       </div>
     )
