@@ -19,7 +19,7 @@ body {
 
 .newPostDiv {
   background: #f8f4e5;
-  padding: 50px 100px;
+  padding: 10px 100px 50px 100px;
   border-top: 10px solid #f45702;
 }
 
@@ -68,11 +68,32 @@ textarea {
 }
 
 
-
+/* this field required */
 h6{
     font-size: 8pt;
     color: #f45702;
     font-weight: bold;
+}
+
+button {
+  display: block;
+  float: right;
+  line-height: 24pt;
+  padding: 0 20px;
+  border: none;
+  background: #f45702;
+  color: white;
+  letter-spacing: 2px;
+  transition: 0.2s all ease-in-out;
+  border-bottom: 2px solid transparent;
+  outline: none;
+}
+
+button:hover {
+  background: inherit;
+  color: #f45702;
+  border-bottom: 2px solid #f45702;
+  
 }
 
 #submitNew {
