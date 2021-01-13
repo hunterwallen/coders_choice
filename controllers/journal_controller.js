@@ -25,7 +25,6 @@ narativ.put('/', (req, res ) => {
         }
     )
 })
-
 // delete route 
 narativ.delete('/:id', (req, res) => {
     Narativ.findByIdAndRemove(req.params.id, (err, deletedJournal) => {
@@ -42,8 +41,6 @@ narativ.post('/', (req, res) => {
         })
     })
 })
-
-
 
 // export route 
 module.exports = narativ
