@@ -2,7 +2,8 @@ class NewPost extends React.Component {
   state= {
     name: '',
     title: '',
-    body: ''
+    body: '',
+    showDiv: 1
   }
   changeState = (event) => {
     this.setState({
@@ -26,14 +27,34 @@ class NewPost extends React.Component {
       document.querySelector('#submitNew').style.display = 'none'
     }
   }
-  createPost = () => {
-
+  flipFlop = () => {
+    if(this.state.showDiv === 1) {
+      document.querySelector('#newPostForm').style.display = "flex"
+      document.querySelector('#postFeed').style.display = "none"
+      this.setState({
+        showDiv: 0
+      })
+    } else {
+      document.querySelector('#postFeed').style.display = "flex"
+      document.querySelector('#newPostForm').style.display = "none"
+      this.setState({
+        showDiv: 1
+      })
+    }
+  }
+  submitPost = () => {
+    this.setState({
+      showDiv: 1
+    })
+    this.props.createPost(this.state)
   }
   render = () => {
     return (
       <div className='newPostDiv'>
-        <h3>Create New NARATiV</h3>
-        <form id='newPostForm' onSubmit={this.createPost}>
+        <button onClick={this.flipFlop}>
+          <h3>Create New NARATiV</h3>
+        </button>
+        <form id='newPostForm' onSubmit={this.submitPost} style={{display: "none"}}>
           <label htmlFor='name'>Name</label>
           <input type='text' id='name' onChange={this.changeState}/>
           <h6>This field is required</h6>
@@ -55,9 +76,29 @@ class App extends React.Component {
   state = {
     posts: []
   }
+
+  createPost = (data) => {
+    event.preventDefault()
+    document.querySelector('#newPostForm').reset()
+    axios.post('/narativ', data).then(response => {
+      this.setState({
+        name: '',
+        title: '',
+        body: '',
+        posts: response.data
+      })
+      document.querySelector('#newPostForm').style.display = 'none'
+      document.querySelector('#postFeed').style.display = 'flex'
+    })
+  }
   render = () => {
     return (
-      <NewPost></NewPost>
+      <div>
+        <NewPost createPost={this.createPost} flipFlop={this.flipFlop}></NewPost>
+        <div id="postFeed" style={{display: "flex"}}>
+          <h2>Posts will go here</h2>
+        </div>
+      </div>
     )
   }
 }
