@@ -10,9 +10,9 @@ class NewPost extends React.Component {
       [event.target.id]: event.target.value
     })
     if(event.target.value === "") {
-      event.target.nextSibling.style.display = 'block'
+      event.target.previousSibling.style.display = 'block'
     } else {
-      event.target.nextSibling.style.display = 'none'
+      event.target.previousSibling.style.display = 'none'
     }
     if(event.target.id === "name" || event.target.id === "title") {
       this.checkRequired()
@@ -76,7 +76,13 @@ class App extends React.Component {
   state = {
     posts: []
   }
-
+  componentDidMount = () => {
+    axios.get('/narativ').then(response => {
+      this.setState({
+        posts: response.data
+      })
+    })
+  }
   createPost = (data) => {
     event.preventDefault()
     document.querySelector('#newPostForm').reset()
@@ -96,11 +102,13 @@ class App extends React.Component {
       <div>
         <NewPost createPost={this.createPost} flipFlop={this.flipFlop}></NewPost>
         <div id="postFeed" style={{display: "flex"}}>
-          <ul>
+          <ul id='postContainer'>
             {this.state.posts.map(post => {
-              <li className='singlePost'>
+              return (<li className='singlePost'>
                 <h3>{post.title}</h3>
+                <h6>by:{post.name}</h6>
               </li>
+            )
             })}
           </ul>
         </div>
