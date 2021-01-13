@@ -56,11 +56,11 @@ class NewPost extends React.Component {
         </button>
         <form id='newPostForm' onSubmit={this.submitPost} style={{display: "none"}}>
           <label htmlFor='name'>Name</label>
+          <h6>This field is required</h6>
           <input type='text' id='name' onChange={this.changeState}/>
-          <h6>This field is required</h6>
           <label htmlFor='title'>Title</label>
-          <input type='text' id='title' onChange={this.changeState}/>
           <h6>This field is required</h6>
+          <input type='text' id='title' onChange={this.changeState}/>
           <label htmlFor='body'>Body</label>
           <textarea id='body' onChange={this.changeState}></textarea>
           <input type='submit' id='submitNew' style={{display: 'none'}}/>
