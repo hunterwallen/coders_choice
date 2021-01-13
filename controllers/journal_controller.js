@@ -34,6 +34,7 @@ narativ.delete('/:id', (req, res) => {
     })
 })
 // post route 
+
 narativ.post('/', (req, res) => {
     Narativ.create(req.body, (err, createdJournal) => {
         Narativ.find({}, (err, createdJournal) => {
