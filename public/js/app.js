@@ -4,6 +4,9 @@ class NewPost extends React.Component {
     date: '',
     body: ''
   }
+  createPost = () => {
+
+  }
   render = () => {
     return (
       <div className='newPostDiv'>
