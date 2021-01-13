@@ -4,7 +4,8 @@ const narativSchema = new mongoose.Schema({
     name: {type:String, required: true},
     title: {type:String, required: true},
     body: String, 
-    date: {type:Date, default: Date.now}
+    date: {type:Date, default: Date("<YYYY-mm-dd>")},
+    // yearMonthDayUTC: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
     
 })
 
