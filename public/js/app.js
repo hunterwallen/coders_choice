@@ -5,6 +5,10 @@ class NewEntry extends React.Component {
     body: ''
   }
   render = () => {
-    return <h1>App.js is linked</js>
+    return <h1>App.js is linked</h1>
   }
 }
+
+
+
+ReactDOM.render(<App></App>, document.querySelector('main'))
