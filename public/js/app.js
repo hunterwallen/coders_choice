@@ -87,21 +87,21 @@ class EditPost extends React.Component {
         event.target.previousSibling.style.display = 'none'
       }
       if(event.target.id === "name" || event.target.id === "title") {
-        this.checkRequired()
+        this.checkRequired(event)
       }
     }
-    checkRequired = () => {
-      let hasName = (document.querySelector('#editPostForm').querySelector('#name').value !== "")
-      let hasTitle = (document.querySelector('#editPostForm').querySelector('#title').value !== "")
+    checkRequired = (event) => {
+      let hasName = (event.target.parentElement.querySelector('#name').value !== "")
+      let hasTitle = (event.target.parentElement.querySelector('#title').value !== "")
       if(hasName && hasTitle) {
-        document.querySelector('#submitEdit').style.display = 'block'
+        event.target.parentElement.lastChild.style.display = 'block'
       } else {
-        document.querySelector('#submitEdit').style.display = 'none'
+        event.target.parentElement.lastChild.style.display  = 'none'
       }
     }
     flipFlop = (event) => {
       if(this.state.showDiv === 1) {
-        document.querySelector('#editPostForm').style.display = "block"
+        event.target.nextSibling.style.display = 'block'
         this.setState({
           name: event.target.nextSibling.querySelector('#name').value,
           title: event.target.nextSibling.querySelector('#title').value,
@@ -109,7 +109,7 @@ class EditPost extends React.Component {
           showDiv: 0
         })
       } else {
-        document.querySelector('#editPostForm').style.display = "none"
+        event.target.nextSibling.style.display = 'none'
         this.setState({
           name: '',
           title: '',
@@ -138,7 +138,7 @@ class EditPost extends React.Component {
             <input type='text' id='title' onChange={this.changeState} defaultValue={this.props.title}/>
             <label htmlFor='body'>Body</label>
             <textarea id='body' onChange={this.changeState} defaultValue={this.props.body}></textarea>
-            <input type='submit' id='submitEdit' style={{display: 'none'}}/>
+            <input type='submit' id='submitEdit' />
           </form>
         </div>
       )
