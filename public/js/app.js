@@ -70,6 +70,75 @@ class NewPost extends React.Component {
   }
 }
 
+class EditPost extends React.Component {
+    state= {
+      name: '',
+      title: '',
+      body: '',
+      showDiv: 1
+    }
+    changeState = (event) => {
+      this.setState({
+        [event.target.id]: event.target.value
+      })
+      if(event.target.value === "") {
+        event.target.previousSibling.style.display = 'block'
+      } else {
+        event.target.previousSibling.style.display = 'none'
+      }
+      if(event.target.id === "name" || event.target.id === "title") {
+        this.checkRequired()
+      }
+    }
+    checkRequired = () => {
+      let hasName = (document.querySelector('#editPostForm').querySelector('#name').value !== "")
+      let hasTitle = (document.querySelector('#editPostForm').querySelector('#title').value !== "")
+      if(hasName && hasTitle) {
+        document.querySelector('#submitEdit').style.display = 'block'
+      } else {
+        document.querySelector('#submitEdit').style.display = 'none'
+      }
+    }
+    flipFlop = () => {
+      if(this.state.showDiv === 1) {
+        document.querySelector('#editPostForm').style.display = "block"
+        this.setState({
+          showDiv: 0
+        })
+      } else {
+        document.querySelector('#editPostForm').style.display = "none"
+        this.setState({
+          showDiv: 1
+        })
+      }
+    }
+    submitPost = () => {
+      this.setState({
+        showDiv: 1
+      })
+      this.props.editPost(this.state)
+    }
+    render = () => {
+      return (
+        <div className='editPostDiv'>
+          <button onClick={this.flipFlop}>
+            <h3>Edit this NARATiV</h3>
+          </button>
+          <form id='editPostForm' onSubmit={this.submitPost} style={{display: "none"}}>
+            <label htmlFor='name'>Name</label>
+            <h6>This field is required</h6>
+            <input type='text' id='name' onChange={this.changeState} defaultValue={this.props.name}/>
+            <label htmlFor='title'>Title</label>
+            <h6>This field is required</h6>
+            <input type='text' id='title' onChange={this.changeState} defaultValue={this.props.title}/>
+            <label htmlFor='body'>Body</label>
+            <textarea id='body' onChange={this.changeState}>{this.props.body}</textarea>
+            <input type='submit' id='submitEdit' style={{display: 'none'}}/>
+          </form>
+        </div>
+      )
+    }
+  }
 
 
 class App extends React.Component {
@@ -97,6 +166,7 @@ class App extends React.Component {
       document.querySelector('#postFeed').style.display = 'block'
     })
   }
+
   render = () => {
     return (
       <div>
@@ -110,6 +180,10 @@ class App extends React.Component {
                 <h6>by:{post.name}</h6>
                 <h6 className='date'>on  {thisDate}</h6>
                 <p>{post.body}</p>
+                <div id='buttonDiv'>
+                  <button id={post._id} onClick={this.deletePost}>Delete this NARATiV</button>
+                  <EditPost body={post.body} name={post.name} title={post.title}></EditPost>
+                </div>
               </li>
             )
             })}
