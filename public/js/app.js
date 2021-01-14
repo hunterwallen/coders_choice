@@ -104,9 +104,12 @@ class App extends React.Component {
         <div id="postFeed" style={{display: "flex"}}>
           <ul id='postContainer'>
             {this.state.posts.map(post => {
+              let thisDate = post.updatedAt.slice(5, 7) + '/' + post.updatedAt.slice(8, 10) + '/' + post.updatedAt.slice(0, 4)
               return (<li className='singlePost'>
                 <h3>{post.title}</h3>
                 <h6>by:{post.name}</h6>
+                <h6 className='date'>on  {thisDate}</h6>
+                <p>{post.body}</p>
               </li>
             )
             })}
