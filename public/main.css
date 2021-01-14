@@ -37,8 +37,28 @@ body {
   outline: none;  
 }
 
+#postFeed{
+  background: #f8f4e5;
+  padding: 10px 100px 50px 100px;
+  border-top: 10px solid #f45702;
+}
+
+.singlePost{
+  border-bottom: 1px solid grey;
+  padding: 2em;
+}
+
 label, input, textarea {
   display: block;
+  width: 100%;
+  font-size: 12pt;
+  line-height: 24pt;
+  font-family: "Spartan";
+}
+
+ul{
+  display: block;
+  list-style: none;
   width: 100%;
   font-size: 12pt;
   line-height: 24pt;
@@ -72,6 +92,11 @@ textarea {
 h6{
     font-size: 8pt;
     color: #f45702;
+    font-weight: bold;
+}
+.date{
+    font-size: 8pt;
+    color: black;
     font-weight: bold;
 }
 
