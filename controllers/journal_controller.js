@@ -2,7 +2,7 @@ const express = require('express');
 const narativ = express.Router();
 const Narativ = require('../models/journalentry.js')
 
-// get route 
+// get route
 narativ.get('/', (req, res) => {
     Narativ.find({}, (err, foundJournal) => {
         res.json(foundJournal)
@@ -25,15 +25,15 @@ narativ.put('/:id', (req, res ) => {
         }
     )
 })
-// delete route 
+// delete route
 narativ.delete('/:id', (req, res) => {
     Narativ.findByIdAndRemove(req.params.id, (err, deletedJournal) => {
         Narativ.find({}, (err, deletedJournal) => {
-            res.json(deltedJournal)
+            res.json(deletedJournal)
         })
     })
 })
-// post route 
+// post route
 
 narativ.post('/', (req, res) => {
     Narativ.create(req.body, (err, createdJournal) => {
@@ -43,5 +43,5 @@ narativ.post('/', (req, res) => {
     })
 })
 
-// export route 
+// export route
 module.exports = narativ
