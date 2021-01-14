@@ -3,5 +3,4 @@
 #testing dev branch 
 #testing evanTesting
 
-Hunter Wallen
-Evan Epperson
+Hunter Wallen and Evan Epperson
